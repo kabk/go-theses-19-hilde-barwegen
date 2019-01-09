@@ -1,0 +1,119 @@
+* {
+  box-sizing: border-box; }
+
+body {
+  margin: 0; }
+
+::-webkit-scrollbar {
+  display: none; }
+
+header {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 10px;
+  padding: 20px; }
+
+th {
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: left; }
+  th.subheader {
+    background-color: rgba(0, 0, 0, 0.15); }
+
+table, th, td {
+  border: 1px solid black; }
+
+th, td {
+  padding: 5px; }
+
+#welcomeText {
+  padding: 10px;
+  padding-left: 18px;
+  padding-right: 18px; }
+
+#mainTableWrap {
+  padding: 10px; }
+  #mainTableWrap #filters, #mainTableWrap #mainTable {
+    float: left; }
+    #mainTableWrap #filters table, #mainTableWrap #mainTable table {
+      width: 100%; }
+  #mainTableWrap #filters {
+    margin-right: 8px;
+    width: calc(15% - 8px); }
+    #mainTableWrap #filters td, #mainTableWrap #filters th {
+      padding: 3px; }
+  #mainTableWrap #mainTable {
+    width: 85%;
+    margin-bottom: 10px; }
+  #mainTableWrap .upvotes {
+    display: none; }
+  #mainTableWrap img {
+    height: 40px; }
+
+.content {
+  display: none; }
+
+#entryPage {
+  background-color: white;
+  left: 0;
+  display: none; }
+  #entryPage table {
+    width: 100%;
+    border: none; }
+  #entryPage .content {
+    margin-top: 20px;
+    display: block;
+    padding: 20px;
+    border: none; }
+    #entryPage .content td {
+      border: none !important; }
+    #entryPage .content img {
+      max-width: 100%; }
+    #entryPage .content iframe {
+      width: 100%;
+      height: 80vh; }
+  #entryPage .bigImgs {
+    background-color: red;
+    text-align: center; }
+  #entryPage #singleTable {
+    padding: 10px; }
+    #entryPage #singleTable .content {
+      display: none; }
+    #entryPage #singleTable img {
+      height: 40px; }
+  #entryPage .entryPageBtns {
+    padding: 20px; }
+
+.button {
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer; }
+
+.right {
+  float: right; }
+
+h4 {
+  margin: 0; }
+
+.title {
+  font-size: 20px;
+  font-weight: bold; }
+
+.hidden {
+  display: none; }
+
+#print {
+  display: none; }
+  #print img {
+    top: 0;
+    width: 100%;
+    height: 100%; }
+
+@media print {
+  * {
+    background-color: white !important;
+    box-shadow: 0 0 white !important; }
+  #print {
+    display: inline-block; }
+  header, #entryPage, #mainPage {
+    display: none; }
+  @page {
+    margin: 0.1cm !important; } }
