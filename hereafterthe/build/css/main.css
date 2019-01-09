@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: serif;
+  padding: 3px; }
+
+::-webkit-scrollbar {
+  display: none; }
+
+h2 {
+  margin: 0; }
+
+table {
+  width: 100%; }
+  table img {
+    max-height: 30px;
+    transition: 0.1s; }
+    table img.bigImg {
+      max-height: 400px; }
+
+table, th, td {
+  border: 1px solid black; }
+
+th {
+  white-space: nowrap; }
+
+td, th {
+  padding: 5px; }
+
+.filter, .tagFilter {
+  color: blue;
+  cursor: pointer; }
+  .filter.active, .tagFilter.active {
+    text-decoration: underline;
+    color: purple; }
