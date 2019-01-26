@@ -1,7 +1,9 @@
+let activeFilter;
+
 const filterTable = () => {
 	$(".filter").click(function() {
 		let filterCat = $(this).attr("filter");
-		console.log(filterCat);
+		activeFilter = filterCat;
 
 		$(".entry").each(function(){
 			let $this = $(this);
@@ -19,8 +21,26 @@ const filterTable = () => {
 
 	$(".clearAll").click(function() {
 		$(".entry").show();
+		activeFilter = "";
 	});
 };
+
+const sortThenFilter = () => {
+	if (activeFilter !== "") {
+		$(".entry").each(function(){
+			let $this = $(this);
+			$this.hide();
+			let entryCat = $this.attr("chap");
+			entryCat = entryCat.split(" ")
+			
+			for (var i = 0; i < entryCat.length; i++) {
+				if (entryCat[i] == activeFilter) {
+					$this.show();
+				}
+			}
+		});
+	}
+}
 
 const rowCount = () => {
 	let len = $(".entry").length;
@@ -32,7 +52,6 @@ const entryPage = () => {
 	let headerH = $("header").outerHeight();
 
 	$(".pageLink").click(function(){
-		console.log()
 		let table = `<table id="singleTable">
 				<tr>
 					<th>Index</th>
@@ -97,9 +116,10 @@ const prevNext = () => {
 }
 
 const formatGraveyardEntries = () => {
+	let count = 0;
 	$(".entry").each(function(i){
 		if ($(this).attr("chap") == "onlineGraveyard image") {
-			$(this).find("td").eq(0).text("05."+i)
+			$(this).find("td").eq(0).text("3.6."+count)
 			// numbers here wrong i think
 			let $content = $(this).find("td").eq(5)
 			let $1stPhoto = $(this).find("td").eq(7).clone()
@@ -110,8 +130,7 @@ const formatGraveyardEntries = () => {
 			$content.append($2ndPhoto);
 			$content.addClass('content');
 			$upvotes.addClass("upvotes");
-			console.log(123123123)
-
+			count++;
 		}
 	})
 }
@@ -254,6 +273,7 @@ const sort = (arr, sortByInd) => {
 		$("#mainTable table").append(`<tr class="entry" chap="${el.chap}">${el.content}</tr>`);
 	})
 
+	sortThenFilter();
 	filterTable(); // could simply output compted html and not use this function
 	rowCount();
 	entryPage();
@@ -286,8 +306,8 @@ const lpad = (string, padString, length) => {
 }
 
 
-for (var i = 0; i < 113; i++) {
-	$("#print").append(`<img src="img/thesisScan/img00${lpad(i,"0",3)}.jpg"/>`);
+for (var i = 1; i < 199; i++) {
+	$("#print").append(`<img src="img/thesisScan/book${i}.jpg"/>`);
 }
 
 $("#printBtn").click(function(){

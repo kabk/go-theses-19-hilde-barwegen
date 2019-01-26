@@ -1,9 +1,11 @@
 "use strict";
 
+var activeFilter = void 0;
+
 var filterTable = function filterTable() {
 	$(".filter").click(function () {
 		var filterCat = $(this).attr("filter");
-		console.log(filterCat);
+		activeFilter = filterCat;
 
 		$(".entry").each(function () {
 			var $this = $(this);
@@ -21,7 +23,25 @@ var filterTable = function filterTable() {
 
 	$(".clearAll").click(function () {
 		$(".entry").show();
+		activeFilter = "";
 	});
+};
+
+var sortThenFilter = function sortThenFilter() {
+	if (activeFilter !== "") {
+		$(".entry").each(function () {
+			var $this = $(this);
+			$this.hide();
+			var entryCat = $this.attr("chap");
+			entryCat = entryCat.split(" ");
+
+			for (var i = 0; i < entryCat.length; i++) {
+				if (entryCat[i] == activeFilter) {
+					$this.show();
+				}
+			}
+		});
+	}
 };
 
 var rowCount = function rowCount() {
@@ -33,7 +53,6 @@ var entryPage = function entryPage() {
 	var headerH = $("header").outerHeight();
 
 	$(".pageLink").click(function () {
-		console.log();
 		var table = "<table id=\"singleTable\">\n\t\t\t\t<tr>\n\t\t\t\t\t<th>Index</th>\n\t\t\t\t\t<th>Name</th>\n\t\t\t\t\t<th>Date</th>\n\t\t\t\t\t<th>Source</th>\n\t\t\t\t\t<th>Author</th>\n\t\t\t\t\t<th>Image</th>\n\t\t\t\t\t<th>Upvotes / Likes</th>\n\t\t\t\t</tr>\n\t\t\t</table>";
 		var row = $(this).parent().parent().clone();
 		var content = row.find(".content").clone();
@@ -76,9 +95,10 @@ var prevNext = function prevNext() {
 };
 
 var formatGraveyardEntries = function formatGraveyardEntries() {
+	var count = 0;
 	$(".entry").each(function (i) {
 		if ($(this).attr("chap") == "onlineGraveyard image") {
-			$(this).find("td").eq(0).text("05." + i);
+			$(this).find("td").eq(0).text("3.6." + count);
 			// numbers here wrong i think
 			var $content = $(this).find("td").eq(5);
 			var $1stPhoto = $(this).find("td").eq(7).clone();
@@ -89,7 +109,7 @@ var formatGraveyardEntries = function formatGraveyardEntries() {
 			$content.append($2ndPhoto);
 			$content.addClass('content');
 			$upvotes.addClass("upvotes");
-			console.log(123123123);
+			count++;
 		}
 	});
 };
@@ -216,6 +236,7 @@ var sort = function sort(arr, sortByInd) {
 		$("#mainTable table").append("<tr class=\"entry\" chap=\"" + el.chap + "\">" + el.content + "</tr>");
 	});
 
+	sortThenFilter();
 	filterTable(); // could simply output compted html and not use this function
 	rowCount();
 	entryPage();
@@ -236,8 +257,8 @@ var lpad = function lpad(string, padString, length) {
 	}return str;
 };
 
-for (var i = 0; i < 113; i++) {
-	$("#print").append("<img src=\"img/thesisScan/img00" + lpad(i, "0", 3) + ".jpg\"/>");
+for (var i = 1; i < 199; i++) {
+	$("#print").append("<img src=\"img/thesisScan/book" + i + ".jpg\"/>");
 }
 
 $("#printBtn").click(function () {
